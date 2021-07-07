@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".LoginFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginBottom="10dp">
+
+        <EditText
+            android:id="@+id/Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="12dp"
+            android:inputType="textEmailAddress"
+            android:padding="8dp"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:background="#E1ACA5A5"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:padding="8dp"
+            android:id="@+id/Password"
+            android:inputType="textPassword"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E1ACA5A5"
+            android:textColor="@color/black"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"/>
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radio_Admin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Admin" />
+
+            <RadioButton
+                android:id="@+id/radio_Normal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Normal" />
+
+            <RadioButton
+                android:id="@+id/radio_Seller"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Seller" />
+        </RadioGroup>
+
+
+        <TextView
+            android:id="@+id/ForgetPW"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:text="ForgetPassword"/>
+
+        <TextView
+            android:id="@+id/ErrorText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/EnterB"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="Enter"
+                android:layout_margin="15dp"
+                android:background="@color/teal_700"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/RegisterB"
+                android:layout_width="110dp"
+                android:layout_height="50dp"
+                android:text="Register"
+                android:layout_margin="15dp"
+                android:background="@color/teal_700"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="30dp"/>
+
+</RelativeLayout>

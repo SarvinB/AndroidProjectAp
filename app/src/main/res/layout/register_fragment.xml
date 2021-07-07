@@ -1,0 +1,129 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".RegisterFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="74dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="#E1ACA5A5"
+            android:hint="Name"
+            android:inputType="text"
+            android:padding="8dp"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/LastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="#E1ACA5A5"
+            android:hint="LastName"
+            android:inputType="text"
+            android:padding="8dp"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="@color/black" />
+
+        <Spinner
+            android:id="@+id/calender_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+
+        <DatePicker
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/UserName"
+            android:layout_width="230dp"
+            android:layout_height="81dp"
+            android:layout_margin="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="#E1ACA5A5"
+            android:hint="Username"
+            android:inputType="text"
+            android:padding="8dp"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/PasswordR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="#E1ACA5A5"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="8dp"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/EmailR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="12dp"
+            android:background="#E1ACA5A5"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="8dp"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:textColor="@color/black" />
+
+        <Spinner
+            android:id="@+id/user_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/EnterB"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_margin="15dp"
+                android:background="@color/purple_200"
+                android:text="Enter" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
