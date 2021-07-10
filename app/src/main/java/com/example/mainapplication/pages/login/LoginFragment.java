@@ -1,8 +1,7 @@
-package com.example.mainapplication;
+package com.example.mainapplication.pages.login;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +20,11 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.mainapplication.pages.home.HomeActivityAdmin;
+import com.example.mainapplication.pages.home.HomeActivityCustomer;
+import com.example.mainapplication.pages.home.HomeActivitySeller;
+import com.example.mainapplication.objects.Person;
+import com.example.mainapplication.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -110,13 +114,43 @@ public class LoginFragment extends Fragment
     private void updateUI(GoogleSignInAccount acct) {
         if(acct != null)
         {
-            String personName = acct.getDisplayName();
-            String personGivenName = acct.getGivenName();
-            String personFamilyName = acct.getFamilyName();
-            String personEmail = acct.getEmail();
-            String personId = acct.getId();
-            Uri personPhoto = acct.getPhotoUrl();
-            Toast.makeText(getActivity(), personName, Toast.LENGTH_SHORT).show();
+            Person person = new Person();
+//            person.setName(acct.getDisplayName());
+
+            //POINT: SETBIRTHDAY
+            //person.setBirthday();
+//            person.setEmail(acct.getEmail());
+//            person.setLastName(acct.getFamilyName());
+//            person.setImage(acct.getPhotoUrl().toString());
+
+            //POINT: SET USER
+            person.setUser(Person.User.CUSTOMER);
+//            person.setUsername(acct.getGivenName());
+
+            switch (person.getUser())
+            {
+                case CUSTOMER:
+                {
+                    Intent intent = new Intent(getContext(), HomeActivityCustomer.class);
+                    startActivity(intent);
+                    break;
+                }
+
+                case ADMIN:
+                {
+                    Intent intent = new Intent(getContext(), HomeActivityAdmin.class);
+                    startActivity(intent);
+                    break;
+                }
+
+                case SELLER:
+                {
+                    Intent intent = new Intent(getContext(), HomeActivitySeller.class);
+                    startActivity(intent);
+                    break;
+                }
+            }
+            getActivity().finish();
         }
         else
         {
