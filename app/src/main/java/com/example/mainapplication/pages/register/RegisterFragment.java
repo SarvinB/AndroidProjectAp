@@ -41,10 +41,6 @@ public class RegisterFragment extends Fragment
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.register_fragment, container, false);
-
-        ImageView camera = view.findViewById(R.id.cameraB);
-        ImageView upload = view.findViewById(R.id.uploadB);
-        ImageView gallery = view.findViewById(R.id.galleryB);
         Spinner userSpinner = view.findViewById(R.id.user_spinner);
         EditText username = view.findViewById(R.id.UserName);
         EditText email = view.findViewById(R.id.EmailR);

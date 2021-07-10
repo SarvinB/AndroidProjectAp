@@ -128,27 +128,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
 
-                <ImageButton
-                    android:id="@+id/cameraB"
-                    android:layout_width="56dp"
-                    android:layout_height="52dp"
-                    android:background="@color/white"
-                    android:src="@android:drawable/ic_menu_camera" />
-
-                <ImageButton
-                    android:id="@+id/galleryB"
-                    android:layout_width="56dp"
-                    android:layout_height="52dp"
-                    android:background="@color/white"
-                    android:src="@android:drawable/ic_menu_gallery" />
-
-                <ImageButton
-                    android:id="@+id/uploadB"
-                    android:layout_width="56dp"
-                    android:layout_height="52dp"
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/floatingActionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/white"
-                    android:src="@android:drawable/ic_menu_upload" />
+                    android:clickable="true"
+                    android:src="@drawable/ic_launcher_foreground"
+                    app:backgroundTint="#FFFFFF" />
 
             </LinearLayout>
             <androidx.appcompat.widget.AppCompatButton
