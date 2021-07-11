@@ -25,18 +25,18 @@ public class HomeActivityCustomer extends AppCompatActivity
         setContentView(R.layout.home_activity_customer);
         TextView textView = findViewById(R.id.testText);
 
-        Date date = new Date();
-        date.setTime(100);
-        Person person = new Person();
-        person.setUsername("sarvinB");
-        person.setUser(Person.User.CUSTOMER);
-        person.setBirthday(date.toString());
-        person.setEmail("sarvin80.b@gmail.com");
-        person.setLastName("baghi");
-        person.setName("sarvin");
-        person.setPassword("12345");
-        person.setImage("www.image.com");
-        Customer customer = new Customer(person, 0, 0);
+//        Date date = new Date();
+//        date.setTime(100);
+//        Person person = new Person();
+//        person.setUsername("sarvinB");
+//        person.setUser(Person.User.CUSTOMER);
+//        person.setBirthday(date.toString());
+//        person.setEmail("sarvin80.b@gmail.com");
+//        person.setLastName("baghi");
+//        person.setName("sarvin");
+//        person.setPassword("12345");
+//        person.setImage("www.image.com");
+//        Customer customer = new Customer(person, 0, 0);
 
 //        Repository.getInstance(getApplicationContext()).insertCustomer(customer, new RepositoryCallback<Void>() {
 //            @Override
@@ -53,20 +53,19 @@ public class HomeActivityCustomer extends AppCompatActivity
 //            }
 //        });
 
-            Repository.getInstance(getApplicationContext()).getAllCustomers(new RepositoryCallback<List<Customer>>() {
-                @Override
-                public void onComplete(Result<List<Customer>> result) {
-                    if(result instanceof Result.Success)
-                    {
-                        String str = ((Result.Success<List<Customer>>) result).data.get(0).name;
-                        textView.setText(str);
-                    }
-                    else if(result instanceof Result.Error)
-                    {
-                        textView.setText(((Result.Error<List<Customer>>) result).exception.getLocalizedMessage());
-                        System.out.println(((Result.Error<List<Customer>>) result).exception.getLocalizedMessage());
-                    }
-                }
-            });
+//            Repository.getInstance(getApplicationContext()).getAllCustomers(new RepositoryCallback<List<Customer>>() {
+//                @Override
+//                public void onComplete(Result<List<Customer>> result) {
+//                    if(result instanceof Result.Success)
+//                    {
+//                        String str = ((Result.Success<List<Customer>>) result).data.get(0).name;
+//                        textView.setText(str);
+//                    }
+//                    else if(result instanceof Result.Error)
+//                    {
+//                        textView.setText(((Result.Error<List<Customer>>) result).exception.getLocalizedMessage());
+//                    }
+//                }
+//            });
     }
 }

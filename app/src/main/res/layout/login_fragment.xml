@@ -17,70 +17,78 @@
         android:layout_marginLeft="60dp"
         android:layout_marginBottom="10dp">
 
+        <TextView
+            android:id="@+id/errorLogin"
+            android:textColor="#6A6464"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+
         <EditText
-            android:id="@+id/Email"
+            android:id="@+id/UsernameLogin"
+            android:hint="username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="12dp"
+            android:layout_marginTop="12dp"
             android:inputType="textEmailAddress"
             android:padding="8dp"
-            android:paddingStart="20dp"
-            android:paddingLeft="20dp"
             android:background="#E1ACA5A5"
             android:textColor="@color/black"/>
 
         <EditText
             android:padding="8dp"
-            android:id="@+id/Password"
+            android:id="@+id/PasswordLogin"
+            android:hint="password"
             android:inputType="textPassword"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#E1ACA5A5"
-            android:textColor="@color/black"
-            android:paddingStart="20dp"
-            android:paddingLeft="20dp"/>
+            android:textColor="@color/black"/>
 
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:id="@+id/radio">
 
             <RadioButton
                 android:id="@+id/radio_Admin"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Admin" />
+                android:layout_marginRight="8dp"
+                android:text="Admin"/>
 
             <RadioButton
-                android:id="@+id/radio_Normal"
+                android:id="@+id/radio_Customer"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Normal" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Customer" />
 
             <RadioButton
                 android:id="@+id/radio_Seller"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
                 android:text="Seller" />
         </RadioGroup>
 
 
         <TextView
             android:id="@+id/ForgetPW"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
+            android:layout_margin="20dp"
             android:text="ForgetPassword"/>
-
-        <TextView
-            android:id="@+id/ErrorText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"

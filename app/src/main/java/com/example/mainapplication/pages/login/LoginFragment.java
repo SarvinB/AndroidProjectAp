@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,12 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.example.mainapplication.data.entities.Admin;
+import com.example.mainapplication.data.entities.Customer;
+import com.example.mainapplication.data.entities.Seller;
+import com.example.mainapplication.data.repository.Repository;
+import com.example.mainapplication.data.repository.RepositoryCallback;
+import com.example.mainapplication.data.repository.Result;
 import com.example.mainapplication.pages.home.HomeActivityAdmin;
 import com.example.mainapplication.pages.home.HomeActivityCustomer;
 import com.example.mainapplication.pages.home.HomeActivitySeller;
@@ -33,9 +41,10 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import java.util.List;
+
 public class LoginFragment extends Fragment
 {
-
     GoogleSignInClient mGoogleSignInClient;
     ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -60,16 +69,151 @@ public class LoginFragment extends Fragment
 
         AppCompatButton enter = view.findViewById(R.id.EnterB);
         AppCompatButton register = view.findViewById(R.id.RegisterB);
-        EditText email = view.findViewById(R.id.Email);
-        EditText password = view.findViewById(R.id.Password);
+        TextView error = view.findViewById(R.id.errorLogin);
+        EditText username = view.findViewById(R.id.UsernameLogin);
+        EditText password = view.findViewById(R.id.PasswordLogin);
         TextView forget = view.findViewById(R.id.ForgetPW);
-        TextView error = view.findViewById(R.id.ErrorText);
+        RadioButton radioAdmin = view.findViewById(R.id.radio_Admin);
+        RadioButton radioSeller = view.findViewById(R.id.radio_Seller);
+        RadioButton radioCustomer = view.findViewById(R.id.radio_Customer);
+        RadioGroup radioGroup = view.findViewById(R.id.radio);
         SignInButton google = view.findViewById(R.id.sign_in_button);
         google.setSize(SignInButton.SIZE_STANDARD);
 
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
+                String user = "";
+                final int[] c = {0};
+
+                if (username.length() == 0)
+                {
+                    username.setError("This field must be full");
+                    c[0] = 1;
+                }
+
+                if (password.length() == 0)
+                {
+                    password.setError("This field must be full");
+                    c[0] = 1;
+                }
+
+                int id = radioGroup.getCheckedRadioButtonId();
+                if(radioCustomer.isChecked())
+                {
+                    user = "Customer";
+                }
+                else if(radioAdmin.isChecked())
+                {
+                    user = "Admin";
+                }
+                else if(radioSeller.isChecked())
+                {
+                    user = "Seller";
+                }
+                else
+                {
+                    Toast.makeText(getContext(), "Please set user", Toast.LENGTH_LONG).show();
+                }
+
+                if(c[0] == 0)
+                {
+                    switch (user) {
+                        case "Customer": {
+                            Repository.getInstance(getContext()).getAllCustomers(new RepositoryCallback<List<Customer>>() {
+                                @Override
+                                public void onComplete(Result<List<Customer>> result) {
+                                    Intent intent = new Intent();
+                                    if (result instanceof Result.Success) {
+                                        for (int i = 0; i < ((Result.Success<List<Customer>>) result).data.size(); i++) {
+                                            if (username.getText().toString().equals(((Result.Success<List<Customer>>) result).data.get(i).userName))
+                                            {
+                                                if(password.getText().toString().equals(((Result.Success<List<Customer>>) result).data.get(i).password))
+                                                {
+                                                    intent.setClass(getActivity(), HomeActivityCustomer.class);
+                                                    getActivity().startActivity(intent);
+                                                }
+                                                else
+                                                {
+                                                    error.setText("Invalid password for this username");
+                                                }
+                                                return;
+                                            }
+                                        }
+                                        error.setText("This username doesn't exist");
+                                    }
+                                    //POINT: set error
+                                    else if (result instanceof Result.Error) {
+                                        System.out.println("error");
+                                    }
+                                }
+                            });
+                            break;
+                        }
+
+                        case "Admin": {
+                            Repository.getInstance(getContext()).getAllAdmins(new RepositoryCallback<List<Admin>>() {
+                                @Override
+                                public void onComplete(Result<List<Admin>> result) {
+                                    Intent intent = new Intent();
+                                    if (result instanceof Result.Success) {
+                                        for (int i = 0; i < ((Result.Success<List<Admin>>) result).data.size(); i++) {
+                                            if (username.getText().toString().equals(((Result.Success<List<Admin>>) result).data.get(i).userName))
+                                            {
+                                                if(password.getText().toString().equals(((Result.Success<List<Admin>>) result).data.get(i).password))
+                                                {
+                                                    intent.setClass(getActivity(), HomeActivityAdmin.class);
+                                                    getActivity().startActivity(intent);
+                                                }
+                                                else
+                                                {
+                                                    error.setText("Invalid password for this username");
+                                                }
+                                                return;
+                                            }
+                                        }
+                                        error.setText("This username doesn't exist");
+                                    } else if (result instanceof Result.Error) {
+                                        System.out.println("error");
+                                    }
+                                }
+                            });
+                            break;
+                        }
+
+                        case "Seller": {
+                            Repository.getInstance(getContext()).getAllSellers(new RepositoryCallback<List<Seller>>() {
+                                @Override
+                                public void onComplete(Result<List<Seller>> result) {
+                                    Intent intent = new Intent();
+                                    if (result instanceof Result.Success) {
+                                        for (int i = 0; i < ((Result.Success<List<Seller>>) result).data.size(); i++) {
+                                            if (username.getText().toString().equals(((Result.Success<List<Seller>>) result).data.get(i).userName))
+                                            {
+                                                if(password.getText().toString().equals(((Result.Success<List<Seller>>) result).data.get(i).password))
+                                                {
+                                                    intent.setClass(getActivity(), HomeActivitySeller.class);
+                                                    getActivity().startActivity(intent);
+                                                }
+                                                else
+                                                {
+                                                    error.setText("Invalid password for this username");
+                                                }
+                                                return;
+                                            }
+                                        }
+                                        error.setText("This username doesn't exist");
+                                    } else if (result instanceof Result.Error) {
+                                        System.out.println("error");
+                                    }
+                                }
+                            });
+                            break;
+                        }
+                    }
+                }
+
             }
         });
 

@@ -38,6 +38,7 @@ public class Repository
                     List<Customer> customers = localDataSource.getAllCustomers();
                     callback.onComplete(new Result.Success<>(customers));
                 }
+
                 catch (Exception e)
                 {
                     callback.onComplete(new Result.Error<>(e));
@@ -74,9 +75,22 @@ public class Repository
         return localDataSource.findByUsernameCustomer(usernameList);
     }
 
-    public void insertAdmin(Admin admin)
+    public void insertAdmin(Admin admin, RepositoryCallback<Void> callback)
     {
-        localDataSource.insertAdmin(admin);
+        MyApplication.executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    localDataSource.insertAdmin(admin);
+                    callback.onComplete(new Result.Success<>(null));
+                }
+                catch (Exception e)
+                {
+                    callback.onComplete(new Result.Error<>(e));
+                }
+
+            }
+        });
     }
 
     public void deleteAdmin(Admin admin)
@@ -84,14 +98,56 @@ public class Repository
         localDataSource.deleteAdmin(admin);
     }
 
-    public List<Admin> getAllAdmins()
+    public void getAllAdmins(RepositoryCallback<List<Admin>> callback)
     {
-        return localDataSource.getAllAdmins();
+        MyApplication.executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    List<Admin> admins = localDataSource.getAllAdmins();
+                    callback.onComplete(new Result.Success<>(admins));
+                }
+                catch (Exception e)
+                {
+                    callback.onComplete(new Result.Error<>(e));
+                }
+            }
+        });
     }
 
-    public void insertSeller(Seller seller)
+    public void insertSeller(Seller seller, RepositoryCallback<Void> callback)
     {
-        localDataSource.insertSeller(seller);
+        MyApplication.executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    localDataSource.insertSeller(seller);
+                    callback.onComplete(new Result.Success<>(null));
+                }
+                catch (Exception e)
+                {
+                    callback.onComplete(new Result.Error<>(e));
+                }
+
+            }
+        });
+    }
+
+    public void getAllSellers(RepositoryCallback<List<Seller>> callback)
+    {
+        MyApplication.executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    List<Seller> sellers = localDataSource.getAllSellers();
+                    callback.onComplete(new Result.Success<>(sellers));
+                }
+                catch (Exception e)
+                {
+                    callback.onComplete(new Result.Error<>(e));
+                }
+            }
+        });
     }
 
     public void deleteSeller(Seller seller)

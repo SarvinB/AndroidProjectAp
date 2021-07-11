@@ -70,6 +70,11 @@ public class LocalDataSource
         return db.sellerDao().findByUsername(usernameList);
     }
 
+    public List<Seller> getAllSellers()
+    {
+        return db.sellerDao().getAll();
+    }
+
     public List<Commodity> getAllCommodities()
     {
         return db.commodityDao().getAll();

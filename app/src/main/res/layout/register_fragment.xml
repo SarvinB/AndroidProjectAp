@@ -8,7 +8,9 @@
     android:foregroundTint="#FFFFFF"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".pages.register.RegisterFragment">
+    android:scrollbarThumbHorizontal="@drawable/ic_photo_black_48dp"
+    tools:context=".pages.register.RegisterFragment"
+    android:id="@+id/registerFragment">
 
     <ScrollView
         android:id="@+id/scrollR"
@@ -109,7 +111,7 @@
                 android:textColor="@color/black" />
 
             <Spinner
-                android:id="@+id/user_spinner"
+                android:id="@+id/registerS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -128,16 +130,24 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/floatingActionButton"
+                <ImageButton
+                    android:id="@+id/cameraB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:clickable="true"
-                    android:src="@drawable/ic_launcher_foreground"
-                    app:backgroundTint="#FFFFFF" />
+                    android:backgroundTint="#FFFFFF"
+                    android:src="@drawable/ic_photo_camera_black_48dp"
+                    app:tint="#000000" />
+
+                <ImageButton
+                    android:id="@+id/galleryB"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
+                    android:src="@drawable/ic_photo_black_48dp" />
 
             </LinearLayout>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/EnterB"
                 android:layout_width="100dp"
