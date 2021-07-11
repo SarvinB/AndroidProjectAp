@@ -21,28 +21,31 @@
             android:id="@+id/Email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:hint="enter your email"
+            android:background="@drawable/backgroud"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="12dp"
             android:inputType="textEmailAddress"
             android:padding="8dp"
             android:paddingStart="20dp"
             android:paddingLeft="20dp"
-            android:background="#E1ACA5A5"
             android:textColor="@color/black"/>
 
         <EditText
-            android:padding="8dp"
             android:id="@+id/Password"
             android:inputType="textPassword"
+            android:hint="enter your password"
             android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="10dp"
+            android:padding="8dp"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#E1ACA5A5"
+            android:background="@drawable/backgroud"
             android:textColor="@color/black"
-            android:paddingStart="20dp"
-            android:paddingLeft="20dp"/>
+            />
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -53,7 +56,8 @@
                 android:id="@+id/radio_Admin"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Admin" />
+                android:text="Admin"
+                android:textColor="#040303"/>
 
             <RadioButton
                 android:id="@+id/radio_Normal"
@@ -74,7 +78,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
-            android:text="ForgetPassword"/>
+            android:text="do you forget your password?"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/ErrorText"
@@ -92,17 +97,12 @@
                 android:id="@+id/EnterB"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
+                android:backgroundTint="#CD7070"
                 android:text="Enter"
                 android:layout_margin="15dp"
                 android:background="@color/teal_700"/>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/RegisterB"
-                android:layout_width="110dp"
-                android:layout_height="50dp"
-                android:text="Register"
-                android:layout_margin="15dp"
-                android:background="@color/teal_700"/>
+
 
         </LinearLayout>
     </LinearLayout>
@@ -113,6 +113,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginBottom="60dp"
+        />
+    <TextView
+        android:id="@+id/register_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="register"
+        android:textColor="#F44336"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"/>
+
 
 </RelativeLayout>

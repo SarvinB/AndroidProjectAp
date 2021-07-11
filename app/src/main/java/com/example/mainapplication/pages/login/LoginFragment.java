@@ -59,7 +59,7 @@ public class LoginFragment extends Fragment
         mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
         AppCompatButton enter = view.findViewById(R.id.EnterB);
-        AppCompatButton register = view.findViewById(R.id.RegisterB);
+        TextView register = view.findViewById(R.id.register_text);
         EditText email = view.findViewById(R.id.Email);
         EditText password = view.findViewById(R.id.Password);
         TextView forget = view.findViewById(R.id.ForgetPW);
@@ -70,6 +70,7 @@ public class LoginFragment extends Fragment
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_productListfragment);
             }
         });
 
