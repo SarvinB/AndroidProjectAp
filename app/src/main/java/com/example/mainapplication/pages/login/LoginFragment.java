@@ -45,6 +45,7 @@ import java.util.List;
 
 public class LoginFragment extends Fragment
 {
+
     GoogleSignInClient mGoogleSignInClient;
     ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -68,10 +69,10 @@ public class LoginFragment extends Fragment
         mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
         AppCompatButton enter = view.findViewById(R.id.EnterB);
-        AppCompatButton register = view.findViewById(R.id.RegisterB);
+        TextView register = view.findViewById(R.id.register_text);
+        EditText password = view.findViewById(R.id.Password);
         TextView error = view.findViewById(R.id.errorLogin);
         EditText username = view.findViewById(R.id.UsernameLogin);
-        EditText password = view.findViewById(R.id.PasswordLogin);
         TextView forget = view.findViewById(R.id.ForgetPW);
         RadioButton radioAdmin = view.findViewById(R.id.radio_Admin);
         RadioButton radioSeller = view.findViewById(R.id.radio_Seller);
