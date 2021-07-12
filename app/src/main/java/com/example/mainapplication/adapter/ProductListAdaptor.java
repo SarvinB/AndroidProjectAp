@@ -33,10 +33,7 @@ public class ProductListAdaptor extends RecyclerView.Adapter<ProductListAdaptor.
     public void setmProducts(List<CommodityObject> products,Context context) {
         mProducts = products;
         mContext=context;
-
-
     }
-
     @NonNull
     @Override
     public ProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

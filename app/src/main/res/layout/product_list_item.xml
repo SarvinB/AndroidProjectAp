@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="2dp"
-    android:backgroundTint="#B7AEC6"
+    android:backgroundTint="#D5CBCB"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:padding="8dp">
@@ -35,7 +35,6 @@
         <TextView
             android:id="@+id/price_product_item"
             android:textStyle="bold"
-
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:padding="3dp"

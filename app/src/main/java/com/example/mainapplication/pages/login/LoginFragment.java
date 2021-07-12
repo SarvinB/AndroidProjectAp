@@ -55,24 +55,24 @@ public class LoginFragment extends Fragment
     public View onCreateView(@NonNull @org.jetbrains.annotations.NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.login_fragment, container, false);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+       GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+       mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
-        AppCompatButton enter = view.findViewById(R.id.EnterB);
-        TextView register = view.findViewById(R.id.register_text);
-        EditText email = view.findViewById(R.id.Email);
-        EditText password = view.findViewById(R.id.Password);
-        TextView forget = view.findViewById(R.id.ForgetPW);
-        TextView error = view.findViewById(R.id.ErrorText);
-        SignInButton google = view.findViewById(R.id.sign_in_button);
-        google.setSize(SignInButton.SIZE_STANDARD);
+       AppCompatButton enter = view.findViewById(R.id.EnterB);
+       TextView register = view.findViewById(R.id.register_text);
+       EditText email = view.findViewById(R.id.Email);
+       EditText password = view.findViewById(R.id.Password);
+       TextView forget = view.findViewById(R.id.ForgetPW);
+       TextView error = view.findViewById(R.id.ErrorText);
+       SignInButton google = view.findViewById(R.id.sign_in_button);
+       google.setSize(SignInButton.SIZE_STANDARD);
 
         enter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_productListfragment);
+           @Override
+           public void onClick(View v) {
+               Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_productListfragment);
             }
-        });
+       });
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +87,6 @@ public class LoginFragment extends Fragment
                 signIn();
             }
         });
-
         return view;
     }
 
