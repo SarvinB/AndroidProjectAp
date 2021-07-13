@@ -45,6 +45,7 @@ import java.util.List;
 
 public class LoginFragment extends Fragment
 {
+
     GoogleSignInClient mGoogleSignInClient;
     ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -64,8 +65,8 @@ public class LoginFragment extends Fragment
     public View onCreateView(@NonNull @org.jetbrains.annotations.NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.login_fragment, container, false);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
+       GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+       mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
         AppCompatButton enter = view.findViewById(R.id.EnterB);
         TextView register = view.findViewById(R.id.register_text);
@@ -217,7 +218,7 @@ public class LoginFragment extends Fragment
                 }
 
             }
-        });
+       });
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
