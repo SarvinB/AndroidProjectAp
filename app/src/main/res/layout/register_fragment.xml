@@ -8,7 +8,6 @@
     android:foregroundTint="#FFFFFF"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:scrollbarThumbHorizontal="@drawable/ic_photo_black_48dp"
     tools:context=".pages.register.RegisterFragment"
     android:id="@+id/registerFragment">
 
@@ -136,15 +135,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="#FFFFFF"
-                    android:src="@drawable/ic_photo_camera_black_48dp"
                     app:tint="#000000" />
 
                 <ImageButton
                     android:id="@+id/galleryB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#FFFFFF"
-                    android:src="@drawable/ic_photo_black_48dp" />
+                    android:backgroundTint="#FFFFFF" />
 
             </LinearLayout>
 

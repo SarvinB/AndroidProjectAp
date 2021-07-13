@@ -29,7 +29,7 @@ import com.example.mainapplication.objects.Person;
 import com.example.mainapplication.pages.home.HomeActivityAdmin;
 import com.example.mainapplication.pages.home.HomeActivityCustomer;
 import com.example.mainapplication.pages.home.HomeActivitySeller;
-import com.github.dhaval2404.imagepicker.ImagePicker;
+//import com.github.dhaval2404.imagepicker.ImagePicker;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -227,26 +227,26 @@ public class RegisterFragment extends Fragment
             }
         });
 
-        gallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImagePicker.with(getParentFragment())
-                        .crop()
-                        .galleryOnly()
-                        .start();
-            }
-        });
-
-
-        camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImagePicker.with(getParentFragment())
-                        .crop()
-                        .cameraOnly()
-                        .start();
-            }
-        });
+//        gallery.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ImagePicker.with(getParentFragment())
+//                        .crop()
+//                        .galleryOnly()
+//                        .start();
+//            }
+//        });
+//
+//
+//        camera.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                ImagePicker.with(getParentFragment())
+//                        .crop()
+//                        .cameraOnly()
+//                        .start();
+//            }
+//        });
         return view;
     }
 }

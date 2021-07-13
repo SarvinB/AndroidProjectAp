@@ -45,7 +45,6 @@ import java.util.List;
 
 public class LoginFragment extends Fragment
 {
-
     GoogleSignInClient mGoogleSignInClient;
     ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -125,14 +124,16 @@ public class LoginFragment extends Fragment
                             Repository.getInstance(getContext()).getAllCustomers(new RepositoryCallback<List<Customer>>() {
                                 @Override
                                 public void onComplete(Result<List<Customer>> result) {
-                                    Intent intent = new Intent();
+                                    Intent intent = new Intent(getActivity(), HomeActivityCustomer.class);
+                                    Intent data = new Intent(getActivity(), HomeActivityCustomer.class);
                                     if (result instanceof Result.Success) {
                                         for (int i = 0; i < ((Result.Success<List<Customer>>) result).data.size(); i++) {
                                             if (username.getText().toString().equals(((Result.Success<List<Customer>>) result).data.get(i).userName))
                                             {
                                                 if(password.getText().toString().equals(((Result.Success<List<Customer>>) result).data.get(i).password))
                                                 {
-                                                    intent.setClass(getActivity(), HomeActivityCustomer.class);
+                                                    intent.putExtra("username", username.getText().toString());
+                                                    intent.putExtra("email", ((Result.Success<List<Customer>>) result).data.get(i).email);
                                                     getActivity().startActivity(intent);
                                                 }
                                                 else

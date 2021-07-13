@@ -22,8 +22,10 @@
             android:textColor="#6A6464"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="12dp"
+            android:padding="8dp"/>
 
         <EditText
             android:id="@+id/UsernameLogin"
@@ -42,18 +44,17 @@
 
         <EditText
             android:id="@+id/Password"
-            android:inputType="textPassword"
-            android:hint="enter your password"
-            android:layout_marginRight="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/backgroud"
+            android:hint="enter your password"
+            android:inputType="textPassword"
             android:padding="8dp"
             android:paddingStart="20dp"
             android:paddingLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/backgroud"
-            android:textColor="@color/black"
-            />
+            android:textColor="@color/black" />
 
         <RadioGroup
             android:layout_width="match_parent"

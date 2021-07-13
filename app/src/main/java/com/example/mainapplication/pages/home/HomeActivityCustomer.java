@@ -1,71 +1,69 @@
 package com.example.mainapplication.pages.home;
 
+import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mainapplication.R;
-import com.example.mainapplication.data.entities.Customer;
-import com.example.mainapplication.data.repository.Repository;
-import com.example.mainapplication.data.repository.RepositoryCallback;
-import com.example.mainapplication.data.repository.Result;
-import com.example.mainapplication.objects.Person;
-
-import java.util.Date;
-import java.util.List;
+import com.example.mainapplication.pages.menu.Profile;
+import com.example.mainapplication.pages.menu.Setting;
+import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivityCustomer extends AppCompatActivity
 {
+    TextView emailHeader;
+    TextView usernameHeader;
+    NavigationView navigationView;
+    Menu menu;
+    MenuItem setting;
+    MenuItem profile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity_customer);
-        TextView textView = findViewById(R.id.testText);
 
-//        Date date = new Date();
-//        date.setTime(100);
-//        Person person = new Person();
-//        person.setUsername("sarvinB");
-//        person.setUser(Person.User.CUSTOMER);
-//        person.setBirthday(date.toString());
-//        person.setEmail("sarvin80.b@gmail.com");
-//        person.setLastName("baghi");
-//        person.setName("sarvin");
-//        person.setPassword("12345");
-//        person.setImage("www.image.com");
-//        Customer customer = new Customer(person, 0, 0);
+        navigationView = findViewById(R.id.navigation_view_customer);
+        View view = navigationView.getHeaderView(0);
+        usernameHeader = view.findViewById(R.id.username_header);
+        emailHeader = view.findViewById(R.id.email_header);
+        menu = navigationView.getMenu();
+        profile = menu.getItem(0);
+        setting = menu.getItem(1);
 
-//        Repository.getInstance(getApplicationContext()).insertCustomer(customer, new RepositoryCallback<Void>() {
-//            @Override
-//            public void onComplete(Result<Void> result) {
-//                if(result instanceof Result.Success)
-//                {
-//                    textView.setText("ok");
-//                }
-//                else if(result instanceof Result.Error)
-//                {
-//                    textView.setText(((Result.Error<Void>) result).exception.getLocalizedMessage());
-//                    System.out.println(((Result.Error<Void>) result).exception.getLocalizedMessage());
-//                }
-//            }
-//        });
+        setting.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.home_activity_customer, new Setting()).commit();
+                return false;
+            }
+        });
 
-//            Repository.getInstance(getApplicationContext()).getAllCustomers(new RepositoryCallback<List<Customer>>() {
-//                @Override
-//                public void onComplete(Result<List<Customer>> result) {
-//                    if(result instanceof Result.Success)
-//                    {
-//                        String str = ((Result.Success<List<Customer>>) result).data.get(0).name;
-//                        textView.setText(str);
-//                    }
-//                    else if(result instanceof Result.Error)
-//                    {
-//                        textView.setText(((Result.Error<List<Customer>>) result).exception.getLocalizedMessage());
-//                    }
-//                }
-//            });
+        profile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.home_activity_customer, new Profile()).commit();
+                return false;
+            }
+        });
+
+
+        Intent data = getIntent();
+        usernameHeader.setText(data.getStringExtra("username"));
+        emailHeader.setText(data.getStringExtra("email"));
+
     }
 }
