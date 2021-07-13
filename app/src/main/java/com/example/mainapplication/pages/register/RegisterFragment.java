@@ -157,6 +157,8 @@ public class RegisterFragment extends Fragment
                                 + Integer.toString(datePicker.getDayOfMonth());
                         person.setBirthday(coStr);
                     }
+
+                    System.out.println(str);
                     //POINT: ADD IMAGE
                     switch (str)
                     {

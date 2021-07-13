@@ -126,7 +126,6 @@ public class LoginFragment extends Fragment
                                 @Override
                                 public void onComplete(Result<List<Customer>> result) {
                                     Intent intent = new Intent(getActivity(), HomeActivityCustomer.class);
-                                    Intent data = new Intent(getActivity(), HomeActivityCustomer.class);
                                     if (result instanceof Result.Success) {
                                         for (int i = 0; i < ((Result.Success<List<Customer>>) result).data.size(); i++) {
                                             if (username.getText().toString().equals(((Result.Success<List<Customer>>) result).data.get(i).userName))
@@ -159,14 +158,15 @@ public class LoginFragment extends Fragment
                             Repository.getInstance(getContext()).getAllAdmins(new RepositoryCallback<List<Admin>>() {
                                 @Override
                                 public void onComplete(Result<List<Admin>> result) {
-                                    Intent intent = new Intent();
+                                    Intent intent = new Intent(getActivity(), HomeActivityAdmin.class);
                                     if (result instanceof Result.Success) {
                                         for (int i = 0; i < ((Result.Success<List<Admin>>) result).data.size(); i++) {
                                             if (username.getText().toString().equals(((Result.Success<List<Admin>>) result).data.get(i).userName))
                                             {
                                                 if(password.getText().toString().equals(((Result.Success<List<Admin>>) result).data.get(i).password))
                                                 {
-                                                    intent.setClass(getActivity(), HomeActivityAdmin.class);
+                                                    intent.putExtra("username", username.getText().toString());
+                                                    intent.putExtra("email", ((Result.Success<List<Admin>>) result).data.get(i).email);
                                                     getActivity().startActivity(intent);
                                                 }
                                                 else
@@ -189,14 +189,15 @@ public class LoginFragment extends Fragment
                             Repository.getInstance(getContext()).getAllSellers(new RepositoryCallback<List<Seller>>() {
                                 @Override
                                 public void onComplete(Result<List<Seller>> result) {
-                                    Intent intent = new Intent();
+                                    Intent intent = new Intent(getActivity(), HomeActivitySeller.class);
                                     if (result instanceof Result.Success) {
                                         for (int i = 0; i < ((Result.Success<List<Seller>>) result).data.size(); i++) {
                                             if (username.getText().toString().equals(((Result.Success<List<Seller>>) result).data.get(i).userName))
                                             {
                                                 if(password.getText().toString().equals(((Result.Success<List<Seller>>) result).data.get(i).password))
                                                 {
-                                                    intent.setClass(getActivity(), HomeActivitySeller.class);
+                                                    intent.putExtra("username", username.getText().toString());
+                                                    intent.putExtra("email", ((Result.Success<List<Seller>>) result).data.get(i).email);
                                                     getActivity().startActivity(intent);
                                                 }
                                                 else

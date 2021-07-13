@@ -27,7 +27,7 @@ public class HomeActivitySeller extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_activity_customer);
+        setContentView(R.layout.home_activity_seller);
 
         navigationView = findViewById(R.id.navigation_view_customer);
         View view = navigationView.getHeaderView(0);

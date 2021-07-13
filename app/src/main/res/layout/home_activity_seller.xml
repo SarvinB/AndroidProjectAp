@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,6 +8,10 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:id="@+id/home_activity_seller">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/home_customer_toolbar"
@@ -18,14 +22,6 @@
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
         </androidx.appcompat.widget.Toolbar>
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view_customer"
-        android:layout_width="165dp"
-        android:layout_height="830dp"
-        android:layout_gravity="start"
-        app:menu="@menu/home_menu"
-        app:headerLayout="@layout/home_activity_header"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="wrap_content"
@@ -49,6 +45,15 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/backgroud"
         android:drawableEnd="@drawable/ic_check_24"
-        android:text="check previous product"
-        />
-</RelativeLayout>
+        android:text="check previous product"/>
+    </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view_customer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/home_menu"
+        app:headerLayout="@layout/home_activity_header"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>
