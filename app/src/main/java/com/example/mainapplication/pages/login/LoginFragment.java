@@ -33,6 +33,7 @@ import com.example.mainapplication.pages.home.HomeActivityCustomer;
 import com.example.mainapplication.pages.home.HomeActivitySeller;
 import com.example.mainapplication.objects.Person;
 import com.example.mainapplication.R;
+import com.example.mainapplication.pages.register.RegisterFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -45,6 +46,18 @@ import java.util.List;
 
 public class LoginFragment extends Fragment
 {
+
+    AppCompatButton enter;
+    TextView register;
+    EditText password;
+    TextView error;
+    EditText username;
+    TextView forget;
+    RadioButton radioAdmin;
+    RadioButton radioSeller;
+    RadioButton radioCustomer;
+    RadioGroup radioGroup;
+    SignInButton google;
 
     GoogleSignInClient mGoogleSignInClient;
     ActivityResultLauncher<Intent> mStartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
@@ -68,17 +81,17 @@ public class LoginFragment extends Fragment
        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
        mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), gso);
 
-        AppCompatButton enter = view.findViewById(R.id.EnterB);
-        TextView register = view.findViewById(R.id.register_text);
-        EditText password = view.findViewById(R.id.Password);
-        TextView error = view.findViewById(R.id.errorLogin);
-        EditText username = view.findViewById(R.id.UsernameLogin);
-        TextView forget = view.findViewById(R.id.ForgetPW);
-        RadioButton radioAdmin = view.findViewById(R.id.radio_Admin);
-        RadioButton radioSeller = view.findViewById(R.id.radio_Seller);
-        RadioButton radioCustomer = view.findViewById(R.id.radio_Customer);
-        RadioGroup radioGroup = view.findViewById(R.id.radio);
-        SignInButton google = view.findViewById(R.id.sign_in_button);
+        enter = view.findViewById(R.id.EnterB);
+        register = view.findViewById(R.id.register_text);
+        password = view.findViewById(R.id.Password);
+        error = view.findViewById(R.id.errorLogin);
+        username = view.findViewById(R.id.UsernameLogin);
+        forget = view.findViewById(R.id.ForgetPW);
+        radioAdmin = view.findViewById(R.id.radio_Admin);
+        radioSeller = view.findViewById(R.id.radio_Seller);
+        radioCustomer = view.findViewById(R.id.radio_Customer);
+        radioGroup = view.findViewById(R.id.radio);
+        google = view.findViewById(R.id.sign_in_button);
         google.setSize(SignInButton.SIZE_STANDARD);
 
         enter.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +147,7 @@ public class LoginFragment extends Fragment
                                                 {
                                                     intent.putExtra("username", username.getText().toString());
                                                     intent.putExtra("email", ((Result.Success<List<Customer>>) result).data.get(i).email);
+                                                    intent.putExtra("image", ((Result.Success<List<Customer>>) result).data.get(i).image);
                                                     getActivity().startActivity(intent);
                                                 }
                                                 else
@@ -167,6 +181,7 @@ public class LoginFragment extends Fragment
                                                 {
                                                     intent.putExtra("username", username.getText().toString());
                                                     intent.putExtra("email", ((Result.Success<List<Admin>>) result).data.get(i).email);
+                                                    intent.putExtra("image", ((Result.Success<List<Admin>>) result).data.get(i).image);
                                                     getActivity().startActivity(intent);
                                                 }
                                                 else
@@ -198,6 +213,7 @@ public class LoginFragment extends Fragment
                                                 {
                                                     intent.putExtra("username", username.getText().toString());
                                                     intent.putExtra("email", ((Result.Success<List<Seller>>) result).data.get(i).email);
+                                                    intent.putExtra("image", ((Result.Success<List<Seller>>) result).data.get(i).image);
                                                     getActivity().startActivity(intent);
                                                 }
                                                 else
@@ -221,10 +237,12 @@ public class LoginFragment extends Fragment
             }
        });
 
+        Intent intent = new Intent(getContext(), RegisterFragment.class);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registerFragment);
+//                Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_registerFragment);
+                getActivity().startActivity(intent);
             }
         });
 
@@ -263,17 +281,30 @@ public class LoginFragment extends Fragment
         if(acct != null)
         {
             Person person = new Person();
-//            person.setName(acct.getDisplayName());
+
 
             //POINT: SETBIRTHDAY
-            //person.setBirthday();
-//            person.setEmail(acct.getEmail());
-//            person.setLastName(acct.getFamilyName());
-//            person.setImage(acct.getPhotoUrl().toString());
+            person.setEmail(acct.getEmail());
+            person.setLastName(acct.getFamilyName());
+            person.setImage(acct.getPhotoUrl().toString());
+            person.setUsername(acct.getGivenName());
+            person.setName(acct.getDisplayName());
 
             //POINT: SET USER
             person.setUser(Person.User.CUSTOMER);
-//            person.setUsername(acct.getGivenName());
+
+            Customer customer = new Customer(person, 0, 0);
+
+            Repository.getInstance(getContext()).insertCustomer(customer, new RepositoryCallback<Void>() {
+                @Override
+                public void onComplete(Result<Void> result) {
+                    if (result instanceof Result.Success) {
+                        System.out.println("ok");
+                    } else if (result instanceof Result.Error) {
+                        System.out.println(((Result.Error<Void>) result).exception.getLocalizedMessage());
+                    }
+                }
+            });
 
             switch (person.getUser())
             {

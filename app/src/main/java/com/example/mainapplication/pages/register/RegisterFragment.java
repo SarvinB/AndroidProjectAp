@@ -1,8 +1,16 @@
 package com.example.mainapplication.pages.register;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +19,19 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.mainapplication.R;
@@ -29,41 +45,57 @@ import com.example.mainapplication.objects.Person;
 import com.example.mainapplication.pages.home.HomeActivityAdmin;
 import com.example.mainapplication.pages.home.HomeActivityCustomer;
 import com.example.mainapplication.pages.home.HomeActivitySeller;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 //import com.github.dhaval2404.imagepicker.ImagePicker;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class RegisterFragment extends Fragment
-{
-    ImageButton gallery;
-    ImageButton camera;
-    Uri uri;
-    Intent intent = new Intent();
+
+public class RegisterFragment extends AppCompatActivity {
+    ImageView image;
+    Spinner userSpinner;
+    EditText username;
+    EditText email;
+    EditText password;
+    EditText name;
+    EditText lastname;
+    DatePicker datePicker;
+    ScrollView scrollView;
+    Button enter;
+    Button button;
+    Uri imageUri;
     String[] user = {"Customer", "Admin", "Seller"};
-    @Nullable
-    @org.jetbrains.annotations.Nullable
+
     @Override
-    public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.register_fragment);
 
-        View view = inflater.inflate(R.layout.register_fragment, container, false);
-        Spinner userSpinner = view.findViewById(R.id.registerS);
-        EditText username = view.findViewById(R.id.UserName);
-        EditText email = view.findViewById(R.id.EmailR);
-        EditText password = view.findViewById(R.id.PasswordR);
-        EditText name = view.findViewById(R.id.Name);
-        EditText lastname = view.findViewById(R.id.LastName);
-        DatePicker datePicker = view.findViewById(R.id.date_picker);
-        ScrollView scrollView = view.findViewById(R.id.scrollR);
-        Button enter = view.findViewById(R.id.EnterB);
-        gallery = view.findViewById(R.id.galleryB);
-        camera = view.findViewById(R.id.cameraB);
+        userSpinner = findViewById(R.id.registerS);
+        username = findViewById(R.id.UserName);
+        email = findViewById(R.id.EmailR);
+        password = findViewById(R.id.PasswordR);
+        name = findViewById(R.id.Name);
+        lastname = findViewById(R.id.LastName);
+        datePicker = findViewById(R.id.date_picker);
+        scrollView = findViewById(R.id.scrollR);
+        enter = findViewById(R.id.EnterB);
+        image = findViewById(R.id.imageView);
 
 
-        ArrayAdapter aa = new ArrayAdapter(view.getContext(), R.layout.support_simple_spinner_dropdown_item, user);
+        ArrayAdapter aa = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, user);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userSpinner.setAdapter(aa);
 
@@ -84,7 +116,7 @@ public class RegisterFragment extends Fragment
 
                 switch (str) {
                     case "Customer": {
-                        Repository.getInstance(getContext()).getAllCustomers(new RepositoryCallback<List<Customer>>() {
+                        Repository.getInstance(RegisterFragment.this).getAllCustomers(new RepositoryCallback<List<Customer>>() {
                             @Override
                             public void onComplete(Result<List<Customer>> result) {
                                 if (result instanceof Result.Success) {
@@ -103,7 +135,7 @@ public class RegisterFragment extends Fragment
                     }
 
                     case "Admin": {
-                        Repository.getInstance(getContext()).getAllAdmins(new RepositoryCallback<List<Admin>>() {
+                        Repository.getInstance(RegisterFragment.this).getAllAdmins(new RepositoryCallback<List<Admin>>() {
                             @Override
                             public void onComplete(Result<List<Admin>> result) {
                                 if (result instanceof Result.Success) {
@@ -122,7 +154,7 @@ public class RegisterFragment extends Fragment
                     }
 
                     case "Seller": {
-                        Repository.getInstance(getContext()).getAllSellers(new RepositoryCallback<List<Seller>>() {
+                        Repository.getInstance(RegisterFragment.this).getAllSellers(new RepositoryCallback<List<Seller>>() {
                             @Override
                             public void onComplete(Result<List<Seller>> result) {
                                 if (result instanceof Result.Success) {
@@ -142,53 +174,27 @@ public class RegisterFragment extends Fragment
                 }
 
 
-                if(c[0] ==0)
-                {
+                if (c[0] == 0) {
                     Person person = new Person();
                     person.setName(name.getText().toString());
                     person.setUsername(username.getText().toString());
                     person.setEmail(email.getText().toString());
                     person.setPassword(password.getText().toString());
                     person.setLastName(lastname.getText().toString());
+                    person.setImage(imageUri.toString());
 
-                    if (datePicker != null)
-                    {
-                        String coStr = Integer.toString(datePicker.getYear())  + Integer.toString(datePicker.getMonth())
+                    if (datePicker != null) {
+                        String coStr = Integer.toString(datePicker.getYear()) + Integer.toString(datePicker.getMonth())
                                 + Integer.toString(datePicker.getDayOfMonth());
                         person.setBirthday(coStr);
                     }
 
-                    System.out.println(str);
                     //POINT: ADD IMAGE
-                    switch (str)
-                    {
-                        case "Customer":
-                        {
+                    switch (str) {
+                        case "Customer": {
                             person.setUser(Person.User.CUSTOMER);
                             Customer customer = new Customer(person, 0, 0);
-                            Repository.getInstance(getContext()).insertCustomer(customer, new RepositoryCallback<Void>() {
-                                @Override
-                                public void onComplete(Result<Void> result) {
-                                    if(result instanceof Result.Success)
-                                    {
-                                        System.out.println("ok");
-                                    }
-                                    else if(result instanceof Result.Error)
-                                    {
-                                        System.out.println(((Result.Error<Void>) result).exception.getLocalizedMessage());
-                                    }
-                                }
-                            });
-
-                            Intent intent = new Intent();
-                            intent.setClass(getActivity(), HomeActivityCustomer.class);
-                            getActivity().startActivity(intent);
-                        }
-
-                        case "Admin": {
-                            person.setUser(Person.User.ADMIN);
-                            Admin admin = new Admin(person, 0, 0, 0);
-                            Repository.getInstance(getContext()).insertAdmin(admin, new RepositoryCallback<Void>() {
+                            Repository.getInstance(RegisterFragment.this).insertCustomer(customer, new RepositoryCallback<Void>() {
                                 @Override
                                 public void onComplete(Result<Void> result) {
                                     if (result instanceof Result.Success) {
@@ -198,57 +204,79 @@ public class RegisterFragment extends Fragment
                                     }
                                 }
                             });
-                            Intent intent = new Intent();
-                            intent.setClass(getActivity(), HomeActivityAdmin.class);
-                            getActivity().startActivity(intent);
+
+                            Intent intent = new Intent(RegisterFragment.this, HomeActivityCustomer.class);
+                            intent.putExtra("username", customer.userName);
+                            intent.putExtra("email", customer.email);
+                            intent.putExtra("image", customer.image);
+                            RegisterFragment.this.startActivity(intent);
                         }
 
-                        case "Seller":
-                        {
-                            person.setUser(Person.User.SELLER);
-                            Seller seller = new Seller(person, 0,0);
-                            Repository.getInstance(getContext()).insertSeller(seller, new RepositoryCallback<Void>() {
+                        case "Admin": {
+                            person.setUser(Person.User.ADMIN);
+                            Admin admin = new Admin(person, 0, 0, 0);
+                            Repository.getInstance(RegisterFragment.this).insertAdmin(admin, new RepositoryCallback<Void>() {
                                 @Override
                                 public void onComplete(Result<Void> result) {
-                                    if(result instanceof Result.Success)
-                                    {
+                                    if (result instanceof Result.Success) {
                                         System.out.println("ok");
-                                    }
-                                    else if(result instanceof Result.Error)
-                                    {
+                                    } else if (result instanceof Result.Error) {
                                         System.out.println(((Result.Error<Void>) result).exception.getLocalizedMessage());
                                     }
                                 }
                             });
-                            Intent intent = new Intent();
-                            intent.setClass(getActivity(), HomeActivitySeller.class);
-                            getActivity().startActivity(intent);
+                            Intent intent = new Intent(RegisterFragment.this, HomeActivityAdmin.class);
+                            intent.putExtra("username", admin.userName);
+                            intent.putExtra("email", admin.email);
+                            intent.putExtra("image", admin.image);
+                            RegisterFragment.this.startActivity(intent);
+                        }
+
+                        case "Seller": {
+                            person.setUser(Person.User.SELLER);
+                            Seller seller = new Seller(person, 0, 0);
+                            Repository.getInstance(RegisterFragment.this).insertSeller(seller, new RepositoryCallback<Void>() {
+                                @Override
+                                public void onComplete(Result<Void> result) {
+                                    if (result instanceof Result.Success) {
+                                        System.out.println("ok");
+                                    } else if (result instanceof Result.Error) {
+                                        System.out.println(((Result.Error<Void>) result).exception.getLocalizedMessage());
+                                    }
+                                }
+                            });
+                            Intent intent = new Intent(RegisterFragment.this, HomeActivitySeller.class);
+                            intent.putExtra("username", seller.userName);
+                            intent.putExtra("email", seller.email);
+                            intent.putExtra("image", seller.image);
+                            RegisterFragment.this.startActivity(intent);
                         }
                     }
                 }
             }
         });
 
-//        gallery.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ImagePicker.with(getParentFragment())
-//                        .crop()
-//                        .galleryOnly()
-//                        .start();
-//            }
-//        });
-//
-//
-//        camera.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ImagePicker.with(getParentFragment())
-//                        .crop()
-//                        .cameraOnly()
-//                        .start();
-//            }
-//        });
-        return view;
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent = new Intent();
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                galleryIntent.setType("image/*");
+                startActivityForResult(galleryIntent, 2);
+            }
+        });
+
     }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(requestCode == 2 && resultCode == RESULT_OK && data != null)
+//        {
+//            imageUri = data.getData();
+//            image.setImageURI(imageUri);
+//        }
+//    }
+
+
 }

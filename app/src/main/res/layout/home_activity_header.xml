@@ -16,6 +16,7 @@
         android:layout_marginEnd="24dp"
         app:civ_border_color="#FF000000"/>
 
+
     <TextView
         android:id="@+id/username_header"
         android:layout_width="wrap_content"
