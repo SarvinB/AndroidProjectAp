@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_customer_and_seller_navigation"
+    app:startDestination="@id/sellerCommodity">
+
+    <fragment
+        android:id="@+id/addCommodity"
+        android:name="com.example.mainapplication.pages.commodity.AddCommodity"
+        android:label="AddCommodity" />
+    <fragment
+        android:id="@+id/sellerCommodity"
+        android:name="com.example.mainapplication.pages.commodity.SellerCommodity"
+        android:label="SellerCommodity" />
+    <fragment
+        android:id="@+id/cart"
+        android:name="com.example.mainapplication.pages.commodity.Cart"
+        android:label="Cart" />
+    <fragment
+        android:id="@+id/allProducts"
+        android:name="com.example.mainapplication.pages.commodity.AllProducts"
+        android:label="AllProducts" />
+</navigation>

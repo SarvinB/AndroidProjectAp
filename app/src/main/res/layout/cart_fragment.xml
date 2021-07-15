@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gradient_start"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:id="@+id/home_activity_customer_seller">
+
+    <SearchView
+        android:id="@+id/SearchView_customer_seller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/sort_customer_seller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/backgroud"
+        android:drawableEnd="@drawable/ic_baseline_filter_list_24"
+        android:text="sort" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="120dp"
+        android:id="@+id/productList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

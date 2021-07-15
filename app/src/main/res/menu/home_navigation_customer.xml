@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/cart_customer"
+        android:icon="@android:drawable/btn_star_big_off"
+        android:title="Cart" />
+
+    <item
+        android:id="@+id/allProducts_customer"
+        android:icon="@android:drawable/btn_star_big_off"
+        android:title="All products" />
+
+</menu>

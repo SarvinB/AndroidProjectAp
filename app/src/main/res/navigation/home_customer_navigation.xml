@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_customer_navigation"
+    app:startDestination="@id/cart_customer">
+
+    <fragment
+        android:id="@+id/cart_customer"
+        android:name="com.example.mainapplication.pages.commodity.Cart"
+        android:label="Cart" />
+    <fragment
+        android:id="@+id/allProducts_customer"
+        android:name="com.example.mainapplication.pages.commodity.AllProducts"
+        android:label="AllProducts" />
+</navigation>

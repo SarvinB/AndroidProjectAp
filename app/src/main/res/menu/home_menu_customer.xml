@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/profile_customer"
+        android:title="Profile"
+        android:icon="@drawable/ic_baseline_person_24"/>
+
+    <item android:id="@+id/setting_customer"
+        android:title="Setting"
+        android:icon="@drawable/ic_baseline_settings_24"/>
+
+    <item
+        android:id="@+id/sign_in_customer"
+        android:icon="@drawable/ic_login_24"
+        android:title="Sign in as a Customer"/>
+
+    <item
+        android:id="@+id/sign_out_customer"
+        android:icon="@drawable/ic_login_24"
+        android:title="Sign out"/>
+
+</menu>
