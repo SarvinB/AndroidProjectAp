@@ -70,8 +70,6 @@
                 android:layout_height="match_parent"
                 android:text="Admin"
                 android:textColor="#040303"/>
-                android:layout_marginRight="8dp"
-                android:text="Admin"/>
 
             <RadioButton
                 android:id="@+id/radio_Customer"

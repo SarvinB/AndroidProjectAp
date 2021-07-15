@@ -22,7 +22,10 @@ public interface SellerDao
     List<Seller> getAll();
 
     @Query("SELECT * FROM Seller WHERE username IN (:usernameList)")
-    List<Seller> findByUsername(String[] usernameList);
+    List<Seller> findByUsernames(String[] usernameList);
+
+    @Query("SELECT * FROM Seller WHERE username IN (:username)")
+    Seller findByUsername(String username);
 
     @Insert
     void insertAll(Seller seller);

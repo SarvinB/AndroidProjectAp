@@ -20,8 +20,11 @@ public interface CustomerDao
     @Query("SELECT * FROM Customer")
     List<Customer> getAll();
 
+    @Query("SELECT * FROM Customer WHERE username IN (:username)")
+    Customer findByUsername(String username);
+
     @Query("SELECT * FROM Customer WHERE username IN (:usernameList)")
-    List<Customer> findByUsername(String[] usernameList);
+    List<Customer> findByUsernames(String[] usernameList);
 
     @Insert
     void insertAll(Customer customer);

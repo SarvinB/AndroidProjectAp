@@ -46,7 +46,6 @@ public class Repository
             }
         });
     }
-
     public void insertCustomer(Customer customer, RepositoryCallback<Void> callback)
     {
         MyApplication.executorService.execute(new Runnable() {
@@ -64,16 +63,20 @@ public class Repository
             }
         });
     }
-
     public void deleteCustomer(Customer customer)
     {
         localDataSource.deleteCustomer(customer);
     }
-
-    public List<Customer> findByUsernameCustomer(String[] usernameList)
+    public List<Customer> findByUsernameCustomers(String[] usernameList)
     {
-        return localDataSource.findByUsernameCustomer(usernameList);
+        return localDataSource.findByUsernameCustomers(usernameList);
     }
+    public Customer findByUsernameCustomer(String username)
+    {
+        return localDataSource.findByUsernameCustomer(username);
+    }
+
+
 
     public void insertAdmin(Admin admin, RepositoryCallback<Void> callback)
     {
@@ -92,12 +95,10 @@ public class Repository
             }
         });
     }
-
     public void deleteAdmin(Admin admin)
     {
         localDataSource.deleteAdmin(admin);
     }
-
     public void getAllAdmins(RepositoryCallback<List<Admin>> callback)
     {
         MyApplication.executorService.execute(new Runnable() {
@@ -114,6 +115,16 @@ public class Repository
             }
         });
     }
+    public List<Admin> findByUsernameAdmins(String[] usernameList)
+    {
+        return localDataSource.findByUsernameAdmins(usernameList);
+    }
+    public Admin findByUsernameAdmin(String username)
+    {
+        return localDataSource.findByUsernameAdmin(username);
+    }
+
+
 
     public void insertSeller(Seller seller, RepositoryCallback<Void> callback)
     {
@@ -132,7 +143,6 @@ public class Repository
             }
         });
     }
-
     public void getAllSellers(RepositoryCallback<List<Seller>> callback)
     {
         MyApplication.executorService.execute(new Runnable() {
@@ -149,34 +159,39 @@ public class Repository
             }
         });
     }
-
     public void deleteSeller(Seller seller)
     {
         localDataSource.deleteSeller(seller);
     }
-
-    public List<Seller> findByUsernameSeller(String[] usernameList)
+    public List<Seller> findByUsernameSellers(String[] usernameList)
     {
-        return localDataSource.findByUsernameSeller(usernameList);
+        return localDataSource.findByUsernameSellers(usernameList);
     }
+    public Seller findByUsernameSeller(String username)
+    {
+        return localDataSource.findByUsernameSeller(username);
+    }
+
+
 
     public List<Commodity> getAllCommodities()
     {
         return localDataSource.getAllCommodities();
     }
-
     public void insertCommodity(Commodity commodity)
     {
         localDataSource.insertCommodity(commodity);
     }
-
     public void deleteCommodity(Commodity commodity)
     {
         localDataSource.deleteCommodity(commodity);
     }
-
-    public List<Commodity> findByIdCommodity(int[] idList)
+    public List<Commodity> findByIdCommodities(int[] idList)
     {
-        return localDataSource.findByIdCommodity(idList);
+        return localDataSource.findByIdCommodities(idList);
+    }
+    public Commodity findByIdCommodity(int id)
+    {
+        return localDataSource.findByIdCommodity(id);
     }
 }

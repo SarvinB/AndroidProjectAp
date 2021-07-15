@@ -25,7 +25,6 @@ import java.util.List;
 
 public class ProductListAdaptor extends RecyclerView.Adapter<ProductListAdaptor.ProductHolder> {
 
-
     List<CommodityObject> mProducts = new ArrayList<>();
     Context mContext;
     View mView;

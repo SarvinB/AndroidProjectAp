@@ -1,20 +1,11 @@
-package com.example.mainapplication.pages.home;
+package com.example.mainapplication.pages.home.activities;
 
-import android.annotation.SuppressLint;
-import android.content.ClipData;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -23,35 +14,25 @@ import com.example.mainapplication.R;
 import com.example.mainapplication.pages.menu.Profile;
 import com.example.mainapplication.pages.menu.Setting;
 import com.google.android.material.navigation.NavigationView;
-import com.squareup.picasso.Picasso;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-
-import de.hdodenhof.circleimageview.CircleImageView;
-
-public class HomeActivityCustomer extends AppCompatActivity {
+public class HomeActivityAdmin extends AppCompatActivity
+{
     TextView emailHeader;
     TextView usernameHeader;
     NavigationView navigationView;
     Menu menu;
     MenuItem setting;
     MenuItem profile;
-    CircleImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_activity_customer);
+        setContentView(R.layout.home_activity_admin);
 
         navigationView = findViewById(R.id.navigation_view_customer);
         View view = navigationView.getHeaderView(0);
         usernameHeader = view.findViewById(R.id.username_header);
         emailHeader = view.findViewById(R.id.email_header);
-        image = view.findViewById(R.id.profile_image);
         menu = navigationView.getMenu();
         profile = menu.getItem(0);
         setting = menu.getItem(1);
@@ -60,7 +41,7 @@ public class HomeActivityCustomer extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.home_activity_customer, new Setting()).commit();
+                fragmentTransaction.replace(R.id.home_activity_admin, new Setting()).commit();
                 return false;
             }
         });
@@ -69,7 +50,7 @@ public class HomeActivityCustomer extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.home_activity_customer, new Profile()).commit();
+                fragmentTransaction.replace(R.id.home_activity_admin, new Profile()).commit();
                 return false;
             }
         });
@@ -78,6 +59,6 @@ public class HomeActivityCustomer extends AppCompatActivity {
         Intent data = getIntent();
         usernameHeader.setText(data.getStringExtra("username"));
         emailHeader.setText(data.getStringExtra("email"));
+
     }
 }
-

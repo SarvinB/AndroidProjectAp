@@ -1,4 +1,4 @@
-package com.example.mainapplication.pages.home;
+package com.example.mainapplication.pages.commodity;
 
 import android.os.Bundle;
 

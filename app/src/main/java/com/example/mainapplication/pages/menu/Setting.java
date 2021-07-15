@@ -1,6 +1,7 @@
 package com.example.mainapplication.pages.menu;
 
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class Setting extends Fragment
 {
+//    @Override
+//    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+//        setPreferencesFromResource(R.xml.preference, rootKey);
+//    }
+
+
     @Nullable
     @org.jetbrains.annotations.Nullable
     @Override

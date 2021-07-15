@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mainapplication">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MainApplication">
+
         <activity android:name=".pages.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,7 +26,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".pages.home.HomeActivityCustomer">
+        <activity android:name=".pages.home.activities.HomeActivityCustomer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +34,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".pages.home.HomeActivityAdmin">
+        <activity android:name=".pages.home.activities.HomeActivityAdmin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +42,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".pages.home.HomeActivitySeller">
+        <activity android:name=".pages.home.activities.HomeActivitySeller">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,16 +50,22 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".search.SearchableActivity" >
+        <activity android:name=".pages.register.RegisterFragment">
             <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
+        </activity>
+
+        <activity android:name=".pages.home.activities.HomeActivityCustomerAndSeller">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
     </application>
-    <uses-feature android:name="android.hardware.camera2" android:required="true"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
 </manifest>

@@ -2,24 +2,24 @@ package com.example.mainapplication.objects;
 
 public class CommodityObject
 {
+    private String phoneNumber;
     private String name;
     private int price;
     private String category;
     private String image;
     private String customer;
     private String seller;
-    private String admin;
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setAdmin(String admin) {
-        this.admin = admin;
-    }
-
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public void setCustomer(String customer) {
@@ -46,10 +46,6 @@ public class CommodityObject
         return price;
     }
 
-    public String getAdmin() {
-        return admin;
-    }
-
     public String getCategory() {
         return category;
     }
@@ -64,5 +60,9 @@ public class CommodityObject
 
     public String getSeller() {
         return seller;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }

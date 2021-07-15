@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pages.home.ProductListFragment"
+    tools:context=".pages.commodity.ProductListFragment"
     tools:ignore="ExtraText">
 
     <Button
@@ -23,11 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-<!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:title="product list page"-->
-<!--        tools:ignore="DuplicateIds"/>-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productList"
         android:layout_width="match_parent"
@@ -36,5 +31,3 @@
         android:layout_margin="50dp"
         android:padding="20dp"/>
      </RelativeLayout>
-
-

@@ -20,7 +20,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import com.example.mainapplication.data.entities.Admin;
 import com.example.mainapplication.data.entities.Customer;
@@ -28,9 +27,9 @@ import com.example.mainapplication.data.entities.Seller;
 import com.example.mainapplication.data.repository.Repository;
 import com.example.mainapplication.data.repository.RepositoryCallback;
 import com.example.mainapplication.data.repository.Result;
-import com.example.mainapplication.pages.home.HomeActivityAdmin;
-import com.example.mainapplication.pages.home.HomeActivityCustomer;
-import com.example.mainapplication.pages.home.HomeActivitySeller;
+import com.example.mainapplication.pages.home.activities.HomeActivityAdmin;
+import com.example.mainapplication.pages.home.activities.HomeActivityCustomer;
+import com.example.mainapplication.pages.home.activities.HomeActivitySeller;
 import com.example.mainapplication.objects.Person;
 import com.example.mainapplication.R;
 import com.example.mainapplication.pages.register.RegisterFragment;
@@ -138,7 +137,7 @@ public class LoginFragment extends Fragment
                             Repository.getInstance(getContext()).getAllCustomers(new RepositoryCallback<List<Customer>>() {
                                 @Override
                                 public void onComplete(Result<List<Customer>> result) {
-                                    Intent intent = new Intent(getActivity(), HomeActivityCustomer.class);
+                                    Intent intent = new Intent(getContext(), HomeActivityCustomer.class);
                                     if (result instanceof Result.Success) {
                                         for (int i = 0; i < ((Result.Success<List<Customer>>) result).data.size(); i++) {
                                             if (username.getText().toString().equals(((Result.Success<List<Customer>>) result).data.get(i).userName))
@@ -147,8 +146,7 @@ public class LoginFragment extends Fragment
                                                 {
                                                     intent.putExtra("username", username.getText().toString());
                                                     intent.putExtra("email", ((Result.Success<List<Customer>>) result).data.get(i).email);
-                                                    intent.putExtra("image", ((Result.Success<List<Customer>>) result).data.get(i).image);
-                                                    getActivity().startActivity(intent);
+                                                    startActivity(intent);
                                                 }
                                                 else
                                                 {
@@ -161,7 +159,7 @@ public class LoginFragment extends Fragment
                                     }
                                     //POINT: set error
                                     else if (result instanceof Result.Error) {
-                                        System.out.println("error");
+                                        System.out.println(((Result.Error<List<Customer>>) result).exception.getMessage());
                                     }
                                 }
                             });
@@ -172,7 +170,8 @@ public class LoginFragment extends Fragment
                             Repository.getInstance(getContext()).getAllAdmins(new RepositoryCallback<List<Admin>>() {
                                 @Override
                                 public void onComplete(Result<List<Admin>> result) {
-                                    Intent intent = new Intent(getActivity(), HomeActivityAdmin.class);
+                                    Intent intent = new Intent();
+                                    intent.setClass(getContext(), HomeActivityAdmin.class);
                                     if (result instanceof Result.Success) {
                                         for (int i = 0; i < ((Result.Success<List<Admin>>) result).data.size(); i++) {
                                             if (username.getText().toString().equals(((Result.Success<List<Admin>>) result).data.get(i).userName))
@@ -181,8 +180,7 @@ public class LoginFragment extends Fragment
                                                 {
                                                     intent.putExtra("username", username.getText().toString());
                                                     intent.putExtra("email", ((Result.Success<List<Admin>>) result).data.get(i).email);
-                                                    intent.putExtra("image", ((Result.Success<List<Admin>>) result).data.get(i).image);
-                                                    getActivity().startActivity(intent);
+                                                    startActivity(intent);
                                                 }
                                                 else
                                                 {
@@ -204,7 +202,8 @@ public class LoginFragment extends Fragment
                             Repository.getInstance(getContext()).getAllSellers(new RepositoryCallback<List<Seller>>() {
                                 @Override
                                 public void onComplete(Result<List<Seller>> result) {
-                                    Intent intent = new Intent(getActivity(), HomeActivitySeller.class);
+                                    Intent intent = new Intent();
+                                    intent.setClass(getContext(), HomeActivitySeller.class);
                                     if (result instanceof Result.Success) {
                                         for (int i = 0; i < ((Result.Success<List<Seller>>) result).data.size(); i++) {
                                             if (username.getText().toString().equals(((Result.Success<List<Seller>>) result).data.get(i).userName))
@@ -213,8 +212,7 @@ public class LoginFragment extends Fragment
                                                 {
                                                     intent.putExtra("username", username.getText().toString());
                                                     intent.putExtra("email", ((Result.Success<List<Seller>>) result).data.get(i).email);
-                                                    intent.putExtra("image", ((Result.Success<List<Seller>>) result).data.get(i).image);
-                                                    getActivity().startActivity(intent);
+                                                    startActivity(intent);
                                                 }
                                                 else
                                                 {
@@ -236,6 +234,7 @@ public class LoginFragment extends Fragment
 
             }
        });
+
 
         Intent intent = new Intent(getContext(), RegisterFragment.class);
         register.setOnClickListener(new View.OnClickListener() {
@@ -286,25 +285,24 @@ public class LoginFragment extends Fragment
             //POINT: SETBIRTHDAY
             person.setEmail(acct.getEmail());
             person.setLastName(acct.getFamilyName());
-            person.setImage(acct.getPhotoUrl().toString());
             person.setUsername(acct.getGivenName());
             person.setName(acct.getDisplayName());
 
             //POINT: SET USER
             person.setUser(Person.User.CUSTOMER);
 
-            Customer customer = new Customer(person, 0, 0);
-
-            Repository.getInstance(getContext()).insertCustomer(customer, new RepositoryCallback<Void>() {
-                @Override
-                public void onComplete(Result<Void> result) {
-                    if (result instanceof Result.Success) {
-                        System.out.println("ok");
-                    } else if (result instanceof Result.Error) {
-                        System.out.println(((Result.Error<Void>) result).exception.getLocalizedMessage());
-                    }
-                }
-            });
+//            Customer customer = new Customer(person, 0, 0);
+//
+//            Repository.getInstance(getContext()).insertCustomer(customer, new RepositoryCallback<Void>() {
+//                @Override
+//                public void onComplete(Result<Void> result) {
+//                    if (result instanceof Result.Success) {
+//                        System.out.println("ok");
+//                    } else if (result instanceof Result.Error) {
+//                        System.out.println(((Result.Error<Void>) result).exception.getLocalizedMessage());
+//                    }
+//                }
+//            });
 
             switch (person.getUser())
             {
@@ -329,7 +327,6 @@ public class LoginFragment extends Fragment
                     break;
                 }
             }
-            getActivity().finish();
         }
         else
         {
@@ -341,6 +338,5 @@ public class LoginFragment extends Fragment
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         mStartForResult.launch(signInIntent);
     }
-
 
 }

@@ -17,7 +17,7 @@ public class Commodity
 
     public Commodity(CommodityObject commodity)
     {
-        admin = commodity.getAdmin();
+        phoneNumber = commodity.getPhoneNumber();
         customer = commodity.getCustomer();
         seller = commodity.getSeller();
         price = commodity.getPrice();
@@ -48,7 +48,7 @@ public class Commodity
     @ColumnInfo(name = "seller")
     public String seller;
 
-    @ColumnInfo(name = "admin")
-    public String admin;
+    @ColumnInfo(name = "phoneNumber")
+    public String phoneNumber;
 
 }

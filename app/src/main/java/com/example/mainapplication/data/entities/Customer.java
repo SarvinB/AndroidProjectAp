@@ -16,6 +16,7 @@ public class Customer extends User
     public Customer(Person person, int commodityNumber, int loginNumber)
     {
         super(person);
+
         this.commodityNumber = commodityNumber;
         this.loginNumber = loginNumber;
     }
@@ -25,4 +26,5 @@ public class Customer extends User
 
     @ColumnInfo(name = "login_number")
     public int loginNumber;
+
 }

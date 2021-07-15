@@ -9,51 +9,47 @@
     android:layout_gravity="center"
     android:id="@+id/home_activity_seller">
 
-    <RelativeLayout
+    <LinearLayout
+        android:background="@color/purple_200"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/home_customer_toolbar"
+            android:id="@+id/home_toolbar_seller"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-        </androidx.appcompat.widget.Toolbar>
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="610dp"
-        android:layout_marginStart="200dp"
-        android:text="insert new product"
-        android:background="@drawable/backgroud"
-        android:padding="10dp"
-        android:drawableEnd="@drawable/ic_drive_file_24"
-        />
-    <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="bottom"
-        android:padding="10dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="680dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/backgroud"
-        android:drawableEnd="@drawable/ic_check_24"
-        android:text="check previous product"/>
-    </RelativeLayout>
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment_seller"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/home_seller_navigation"/>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation_seller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+            app:menu="@menu/home_navigation_seller"/>
+
+    </LinearLayout>
+
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation_view_customer"
+        android:id="@+id/navigation_view_seller"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/home_menu"
+        app:menu="@menu/home_menu_customer"
         app:headerLayout="@layout/home_activity_header"/>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

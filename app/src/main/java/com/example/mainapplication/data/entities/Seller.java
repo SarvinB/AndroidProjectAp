@@ -9,6 +9,7 @@ import com.example.mainapplication.objects.Person;
 @Entity
 public class Seller extends User
 {
+
     public Seller()
     {
 
@@ -25,4 +26,5 @@ public class Seller extends User
 
     @ColumnInfo(name = "login_number")
     public int loginNumber;
+
 }
