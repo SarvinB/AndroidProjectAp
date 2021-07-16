@@ -17,6 +17,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.mainapplication.R;
+import com.example.mainapplication.data.entities.Customer;
+import com.example.mainapplication.data.entities.Seller;
+import com.example.mainapplication.data.repository.Repository;
+import com.example.mainapplication.data.repository.RepositoryCallback;
+import com.example.mainapplication.data.repository.Result;
+import com.example.mainapplication.objects.Person;
 import com.example.mainapplication.pages.menu.Profile;
 import com.example.mainapplication.pages.menu.Setting;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,8 +36,31 @@ public class HomeActivitySeller extends AppCompatActivity
     Menu menu;
     MenuItem setting;
     MenuItem profile;
+    MenuItem signInAsCustomer;
     Toolbar toolbar;
     DrawerLayout drawerLayout;
+
+
+    class DataBaseThread extends Thread
+    {
+        @Override
+        public void run() {
+            Seller seller = Repository.getInstance(HomeActivitySeller.this).findByUsernameSeller(usernameHeader.getText().toString());
+            Person person = Person.getPerson(seller);
+            Customer customer = new Customer(person, seller.commodityNumber, seller.loginNumber);
+            Repository.getInstance(HomeActivitySeller.this).insertSeller(seller, new RepositoryCallback<Void>() {
+                @Override
+                public void onComplete(Result<Void> result) {
+                    if (result instanceof Result.Success) {
+                        System.out.println("ok");
+                    } else if (result instanceof Result.Error) {
+                        System.out.println(((Result.Error<Void>) result).exception.getLocalizedMessage());
+                    }
+                }
+            });
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +76,13 @@ public class HomeActivitySeller extends AppCompatActivity
         menu = navigationView.getMenu();
         profile = menu.getItem(0);
         setting = menu.getItem(1);
+        signInAsCustomer = menu.getItem(2);
         toolbar = findViewById(R.id.home_toolbar_seller);
+
+        Intent data = getIntent();
+        usernameHeader.setText(data.getStringExtra("username"));
+        emailHeader.setText(data.getStringExtra("email"));
+
 
         setting.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -67,10 +102,20 @@ public class HomeActivitySeller extends AppCompatActivity
             }
         });
 
+        signInAsCustomer.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
 
-        Intent data = getIntent();
-        usernameHeader.setText(data.getStringExtra("username"));
-        emailHeader.setText(data.getStringExtra("email"));
+                DataBaseThread dataBaseThread = new DataBaseThread();
+                dataBaseThread.start();
+
+                Intent intent = new Intent(HomeActivitySeller.this, HomeActivityCustomerAndSeller.class);
+                intent.putExtra("username",usernameHeader.getText().toString());
+                intent.putExtra("email",emailHeader.getText().toString());
+                startActivity(intent);
+                return false;
+            }
+        });
 
 
         NavHostFragment navHostFragment =
